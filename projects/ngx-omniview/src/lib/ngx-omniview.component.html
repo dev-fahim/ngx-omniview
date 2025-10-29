@@ -1,4 +1,9 @@
-<div class="omniview-content">
-  {{ renderedContent }}
-</div>
+<div
+  class="omniview-content"
+  *ngIf="usesInnerHTML; else textBlock"
+  [innerHTML]="renderedContent"
+></div>
 
+<ng-template #textBlock>
+  <div class="omniview-content">{{ renderedContent }}</div>
+</ng-template>
