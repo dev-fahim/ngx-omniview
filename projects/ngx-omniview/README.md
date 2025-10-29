@@ -1,63 +1,89 @@
-# NgxOmniview
+# ngx-omniview
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+Universal content renderer for Angular. Display raw text as HTML, Markdown, LaTeX, MathJax, JSON, and more with a single component.
 
-## Code scaffolding
+## Features
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- ✅ **Multi-format support**: text, html, markdown, latex, mathjax, json, code
+- ✅ **Angular 15-20 compatible**
+- ✅ **Simple API**: Just pass data and format
+- ✅ **Unstyled**: Adapts to your design
+- ✅ **Lightweight**: Modular renderer architecture
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
+## Installation
 
 ```bash
-ng build ngx-omniview
+npm install ngx-omniview
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+## Usage
 
-### Publishing the Library
+### Basic Example
 
-Once the project is built, you can publish your library by following these steps:
+```typescript
+import { Component } from '@angular/core';
+import { NgxOmniviewComponent } from 'ngx-omniview';
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-omniview
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+@Component({
+  selector: 'app-example',
+  imports: [NgxOmniviewComponent],
+  template: `<omniview [data]="content" [format]="'text'"></omniview>`
+})
+export class ExampleComponent {
+  content = 'Hello World!';
+}
 ```
 
-## Running end-to-end tests
+### Supported Formats
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```typescript
+<omniview [data]="text" [format]="'text'"></omniview>
+<omniview [data]="html" [format]="'html'"></omniview>
+<omniview [data]="markdown" [format]="'markdown'"></omniview>
+<omniview [data]="latex" [format]="'latex'"></omniview>
+<omniview [data]="mathjax" [format]="'mathjax'"></omniview>
+<omniview [data]="json" [format]="'json'"></omniview>
+<omniview [data]="code" [format]="'code'"></omniview>
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## API
 
-## Additional Resources
+### Inputs
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `data` | `string` | `''` | Raw content to render |
+| `format` | `OmniviewFormat` | `'text'` | Content format type |
+
+### Types
+
+```typescript
+type OmniviewFormat = 
+  | 'text' 
+  | 'html' 
+  | 'markdown' 
+  | 'latex' 
+  | 'mathjax' 
+  | 'json' 
+  | 'code';
+```
+
+## Development Status
+
+| Format | Status |
+|--------|--------|
+| text | ✅ Implemented |
+| html | 🚧 In Progress |
+| markdown | 🚧 In Progress |
+| latex | 🚧 In Progress |
+| mathjax | 🚧 In Progress |
+| json | 🚧 In Progress |
+| code | 🚧 In Progress |
+
+## Contributing
+
+Contributions welcome! See [GitHub repository](https://github.com/binapani-edu/ngx-omniview) for details.
+
+## License
+
+MIT
