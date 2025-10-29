@@ -1,63 +1,64 @@
 # ngx-omniview
 
-A universal viewer for Angular that renders raw string inputs as text, HTML, Markdown, LaTeX, MathJax, JSON, and more... all from a single component.
+A universal content viewer for Angular that renders raw string inputs as Plain Text, HTML, Markdown, LaTeX, MathJax, JSON, and more... all from a single component.
 
----
+**Supports:** Angular 15-20 | **Status:** In Development
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+## Usage
 
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
+```typescript
+<omniview [data]="content" [format]="'markdown'"></omniview>
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Setup
 
 ```bash
-ng generate component component-name
+npm install
+ng build ngx-omniview    # Build library
+ng serve demo            # Run demo app
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Development
+
+| Command | Purpose |
+|---------|---------|
+| `ng build ngx-omniview` | Build the library |
+| `ng test ngx-omniview` | Run library tests |
+| `ng serve demo` | Run demo app at `http://localhost:4200` |
+
+**Workflow:** After changing library code, rebuild with `ng build ngx-omniview` before testing in demo app.
+
+## Project Structure
+
+```
+ngx-omniview/
+├── projects/
+│   ├── ngx-omniview/          # Library source (published to npm)
+│   │   └── src/lib/
+│   │       ├── renderers/     # Format renderers (text, html, markdown, etc.)
+│   │       └── ngx-omniview.component.ts
+│   └── demo/                  # Demo app (not published)
+└── dist/ngx-omniview/         # Built library (after ng build)
+```
+
+## Contributing
+
+**Adding a new format renderer?** See [renderers/README.md](projects/ngx-omniview/src/lib/renderers/README.md)
+
+### Quick Guide:
+1. Create `[format].renderer.ts` in `projects/ngx-omniview/src/lib/renderers/`
+2. Register in `renderer.registry.ts`
+3. Test in demo app
+4. Submit PR
+
+## Publishing
 
 ```bash
-ng generate --help
+ng build ngx-omniview
+cd dist/ngx-omniview
+npm publish
 ```
 
-## Building
+## License
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT
