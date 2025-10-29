@@ -5,5 +5,7 @@
 ></div>
 
 <ng-template #textBlock>
-  <div class="omniview-content">{{ renderedContent }}</div>
+  <!-- Preserve whitespace only for text-based formats (like: text, json, code) -->
+  <!-- and NOT for raw HTML -->
+  <div class="omniview-content preserve-whitespace">{{ renderedContent }}</div>
 </ng-template>
