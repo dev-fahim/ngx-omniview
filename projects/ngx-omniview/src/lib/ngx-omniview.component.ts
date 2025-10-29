@@ -17,25 +17,8 @@ import { OmniviewFormat, rendererRegistry } from './renderers';
 @Component({
   selector: 'omniview',
   imports: [],
-  template: `
-    <div class="omniview-content">
-      {{ renderedContent }}
-    </div>
-  `,
-  styles: `
-    :host {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-
-    .omniview-content {
-      width: 100%;
-      height: 100%;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-  `
+  templateUrl: './ngx-omniview.component.html',
+  styleUrl: './ngx-omniview.component.css'
 })
 export class NgxOmniviewComponent {
   /**
