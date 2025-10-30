@@ -1,14 +1,15 @@
 <div class="omniview-content">
   <!-- HTML -->
-  <div *ngIf="format === 'html'" [innerHTML]="renderedContent"></div>
+  <div *ngIf="format === 'html'; else markdownOrOther" [innerHTML]="renderedContent"></div>
 
-  <!-- Markdown -->
-  <markdown *ngIf="format === 'markdown'" katex [data]="renderedContent"></markdown>
+  <!-- Markdown / Other formats -->
+  <ng-template #markdownOrOther>
+    <markdown *ngIf="format === 'markdown'; else otherFormats" katex [data]="renderedContent"></markdown>
 
-  <!-- Other formats -->
-  <pre *ngIf="format !== 'html' && format !== 'markdown'">
-    {{ renderedContent }}
-  </pre>
+    <ng-template #otherFormats>
+      <pre>{{ renderedContent }}</pre>
+    </ng-template>
+  </ng-template>
 </div>
 
 <ng-template #textBlock>
