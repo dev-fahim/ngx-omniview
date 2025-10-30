@@ -50,8 +50,18 @@ main {
 
 .viewer-row .viewer-container {
   flex: 1;
-  min-height: 200px;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewer-row pre.viewer-container {
+  display: flex;
+}
+
+.viewer-row pre {
+  flex: 1;
+  margin: 0;
+  white-space: pre-wrap;
 }
 
 .viewer-container {

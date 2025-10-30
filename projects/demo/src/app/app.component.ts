@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { NgxOmniviewComponent } from 'ngx-omniview';
 import { MarkdownModule } from 'ngx-markdown';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  imports: [NgxOmniviewComponent, HttpClientModule, MarkdownModule],
+  imports: [NgxOmniviewComponent, MarkdownModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -21,16 +20,10 @@ Line breaks are preserved.
 This library supports multiple formats!`;
 
   htmlContent = `
-<h1>HTML Content</h1>
-<p>This is <strong>bold</strong> and <em>italic</em> text.</p>
-<ul>
-  <li>List item 1</li>
-  <li>List item 2</li>
-  <li>List item 3</li>
-</ul>
-<p><a href="https://angular.dev" target="_blank">Link to Angular</a></p>`;
+<h1>HTML Content</h1><p>This is <strong>bold</strong> text.</p>`;
   
-  markdownContent = `# Markdown Example
+  markdownContent = `
+# Markdown Example
 ## Features
 - Item 1
 - Item 2

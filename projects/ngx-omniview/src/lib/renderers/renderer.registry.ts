@@ -1,32 +1,8 @@
+import { renderHtml } from './html.renderer';
+import { renderJson } from './json.renderer';
+import { renderMarkdown } from './markdown.renderer';
 import { RendererRegistry } from './renderer.types';
 import { renderText } from './text.renderer';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
-/**
- * Renderer for HTML that safely sanitizes content
- */
-export const renderHtml = (sanitizer: DomSanitizer) => (data: string): SafeHtml => {
-  return sanitizer.bypassSecurityTrustHtml(data);
-};
-
-/**
- * Renderer for Markdown using ngx-markdown
- * No parsing needed here; the component template will handle it
- */
-export const renderMarkdown = (data: string): string => data;
-
-/**
- * Renderer for JSON
- * Pretty-prints parsed JSON
- */
-export const renderJson = (data: string): string => {
-  try {
-    const obj = JSON.parse(data);
-    return JSON.stringify(obj, null, 2);
-  } catch {
-    return `Invalid JSON:\n${data}`;
-  }
-};
 
 /**
  * Default placeholder renderer for formats not yet implemented
@@ -61,12 +37,12 @@ const renderPlaceholder = (format: string) => (data: string): string => {
 export const rendererRegistry: RendererRegistry = {
   text: renderText,
   html: renderHtml,
+  markdown: renderMarkdown,
+  json: renderJson,
   
   // Placeholders for future renderers
-  markdown: renderPlaceholder('markdown'),
   latex: renderPlaceholder('latex'),
   mathjax: renderPlaceholder('mathjax'),
-  json: renderJson,
   code: renderPlaceholder('code'),
 };
 
