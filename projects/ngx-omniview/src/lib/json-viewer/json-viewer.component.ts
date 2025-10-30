@@ -13,6 +13,7 @@ export class JsonViewerComponent implements OnInit {
   @Input() showCounts: boolean = true;
 
   collapsed: Record<string, boolean> = {};
+  private static readonly ROOT_KEY = '__root__';
 
   ngOnInit() {
     // Collapse all expandable items on initial load
@@ -21,6 +22,10 @@ export class JsonViewerComponent implements OnInit {
         this.collapsed[key] = true;
       }
     });
+    // Root starts collapsed
+    if (this.level === 0) {
+      this.collapsed[JsonViewerComponent.ROOT_KEY] = true;
+    }
   }
 
   get keys(): string[] {
@@ -29,6 +34,17 @@ export class JsonViewerComponent implements OnInit {
 
   get isArray(): boolean {
     return Array.isArray(this.data);
+  }
+
+  // Keys used for rendering: for root, render a synthetic key
+  get renderKeys(): string[] {
+    if (this.level === 0) return [JsonViewerComponent.ROOT_KEY];
+    return this.keys;
+  }
+
+  getValueByKey(key: string): any {
+    if (key === JsonViewerComponent.ROOT_KEY) return this.data;
+    return this.data[key];
   }
 
   isObject(value: any): boolean {
