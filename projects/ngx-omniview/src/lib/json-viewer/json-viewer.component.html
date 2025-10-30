@@ -1,29 +1,50 @@
-<ul class="json-tree">
-    <ng-container *ngFor="let key of keys">
-        <li>
-            <!-- Chevron button -->
-            <button *ngIf="isObject(data[key])" class="toggle-btn" [class.collapsed]="collapsed[key]"
-                (click)="toggle(key)" aria-label="Toggle">
-                ▶
-            </button>
+<ul class="jv">
+  <ng-container *ngFor="let key of keys; let last = last; let i = index">
+    <!-- Opening line -->
+    <li class="jv-line">
+      <button *ngIf="isObject(data[key])"
+              class="jv-toggle"
+              [class.collapsed]="collapsed[key]"
+              (click)="toggle(key)"
+              aria-label="Toggle">
+        {{ collapsed[key] ? '▶' : '▼' }}
+      </button>
+      <span *ngIf="!isObject(data[key])" class="jv-spacer"></span>
 
-            <!-- Placeholder spacing for non-object values -->
-            <span *ngIf="!isObject(data[key])" class="toggle-placeholder"></span>
+      <span [class]="isArray ? 'jv-index' : 'jv-key'">{{ isArray ? i : key }}</span>
+      <span class="jv-colon">:</span>
 
-            <!-- JSON Key -->
-            <span class="json-key">{{ key }}:</span>
+      <!-- Object/array collapsed preview -->
+      <ng-container *ngIf="isObject(data[key]) && collapsed[key]">
+        <span class="jv-bracket">{{ getBracket(data[key], true) }}</span>
+        <span class="jv-ellipsis">...</span>
+        <span class="jv-bracket">{{ getBracket(data[key], false) }}</span>
+        <span *ngIf="showCounts" class="jv-count">{{ getCountLabel(data[key]) }}</span>
+        <span *ngIf="!last" class="jv-comma">,</span>
+      </ng-container>
 
-            <!-- Nested object -->
-            <ng-container *ngIf="isObject(data[key]); else valueTemplate">
-                <json-viewer *ngIf="!collapsed[key]" [data]="data[key]"></json-viewer>
-            </ng-container>
+      <!-- Primitive value -->
+      <ng-container *ngIf="!isObject(data[key])">
+        <span [ngClass]="getValueClass(data[key])">{{ formatValue(data[key]) }}</span>
+        <span *ngIf="!last" class="jv-comma">,</span>
+      </ng-container>
 
-            <!-- Primitive value -->
-            <ng-template #valueTemplate>
-                <span [ngClass]="getValueClass(data[key])">
-                    {{ formatValue(data[key]) }}
-                </span>
-            </ng-template>
-        </li>
-    </ng-container>
+      <!-- Opening bracket when expanded -->
+      <ng-container *ngIf="isObject(data[key]) && !collapsed[key]">
+        <span class="jv-bracket">{{ getBracket(data[key], true) }}</span>
+      </ng-container>
+    </li>
+
+    <!-- Nested content when expanded -->
+    <li *ngIf="isObject(data[key]) && !collapsed[key]" class="jv-children">
+      <json-viewer [data]="data[key]" [level]="level + 1" [showCounts]="showCounts"></json-viewer>
+    </li>
+
+    <!-- Closing line when expanded -->
+    <li *ngIf="isObject(data[key]) && !collapsed[key]" class="jv-line">
+      <span class="jv-spacer"></span>
+      <span class="jv-bracket">{{ getBracket(data[key], false) }}</span>
+      <span *ngIf="!last" class="jv-comma">,</span>
+    </li>
+  </ng-container>
 </ul>
