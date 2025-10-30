@@ -3,11 +3,14 @@ import { RendererFunction } from './renderer.types';
 /**
  * JSON Renderer
  * 
- * Attempts to parse and pretty-print JSON data. If parsing fails,
- * it returns the raw string prefixed with an error message.
+ * Parses and pretty-prints JSON data for simple text display.
+ * 
+ * Note: The interactive JSON viewer component handles JSON display in the UI.
+ * This renderer is registered for consistency but the main component handles
+ * JSON parsing directly to pass objects to the viewer component.
  * 
  * @param data - Raw JSON string
- * @returns Pretty-printed JSON or an error message
+ * @returns Pretty-printed JSON string or an error message
  * 
  * @example
  * ```typescript
@@ -22,7 +25,7 @@ export const renderJson: RendererFunction = (data: string): string => {
   try {
     const obj = JSON.parse(data);
     return JSON.stringify(obj, null, 2);
-  } catch {
+  } catch (error) {
     return `Invalid JSON:\n${data}`;
   }
 };
