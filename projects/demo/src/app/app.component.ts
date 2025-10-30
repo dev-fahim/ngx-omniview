@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NgxOmniviewComponent } from 'ngx-omniview';
+import { MarkdownModule } from 'ngx-markdown';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  imports: [NgxOmniviewComponent],
+  imports: [NgxOmniviewComponent, HttpClientModule, MarkdownModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

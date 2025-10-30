@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { OmniviewFormat, rendererRegistry, renderHtml, renderMarkdown } from './renderers';
 import { CommonModule } from '@angular/common';
-import { OmniviewFormat, rendererRegistry } from './renderers';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { MarkdownModule } from 'ngx-markdown';
 
 /**
  * OmniviewComponent - Universal content renderer
@@ -19,7 +22,7 @@ import { OmniviewFormat, rendererRegistry } from './renderers';
  */
 @Component({
   selector: 'omniview',
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule, MarkdownModule],
   templateUrl: './ngx-omniview.component.html',
   styleUrl: './ngx-omniview.component.css'
 })
@@ -34,6 +37,8 @@ export class NgxOmniviewComponent {
    * @default 'text'
    */
   @Input() format: OmniviewFormat = 'text';
+
+  constructor(private sanitizer: DomSanitizer) { }
 
   /**
    * Determine if the current format requires innerHTML binding
@@ -54,6 +59,14 @@ export class NgxOmniviewComponent {
     }
 
     // Get the appropriate renderer from the registry
+    if (this.format === 'html') {
+      return renderHtml(this.sanitizer)(this.data) as string;
+    }
+
+    if (this.format === 'markdown') {
+      return renderMarkdown(this.data);
+    }
+
     const renderer = rendererRegistry[this.format];
     
     if (!renderer) {

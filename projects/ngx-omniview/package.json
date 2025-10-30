@@ -27,6 +27,8 @@
     "@angular/core": ">=15.0.0 <21.0.0"
   },
   "dependencies": {
+    "marked": "^15.0.12",
+    "ngx-markdown": "^19.1.1",
     "tslib": "^2.3.0"
   },
   "sideEffects": false

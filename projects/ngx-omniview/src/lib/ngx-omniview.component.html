@@ -1,8 +1,15 @@
-<div
-  class="omniview-content"
-  *ngIf="usesInnerHTML; else textBlock"
-  [innerHTML]="renderedContent"
-></div>
+<div class="omniview-content">
+  <!-- HTML -->
+  <div *ngIf="format === 'html'" [innerHTML]="renderedContent"></div>
+
+  <!-- Markdown -->
+  <markdown *ngIf="format === 'markdown'" katex [data]="renderedContent"></markdown>
+
+  <!-- Other formats -->
+  <pre *ngIf="format !== 'html' && format !== 'markdown'">
+    {{ renderedContent }}
+  </pre>
+</div>
 
 <ng-template #textBlock>
   <!-- Preserve whitespace only for text-based formats (like: text, json, code) -->

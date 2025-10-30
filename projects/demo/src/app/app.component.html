@@ -14,25 +14,40 @@
 
     <section class="demo-section">
       <h2>HTML Format</h2>
-      <div class="viewer-container">
-        <omniview [data]="htmlContent" [format]="'html'"></omniview>
+      <div class="viewer-row">
+        <div class="viewer-container">
+          {{ htmlContent }}
+        </div>
+        <div class="viewer-container">
+          <omniview [data]="htmlContent" [format]="'html'"></omniview>
+        </div>
       </div>
     </section>
 
     <section class="demo-section">
-      <h2>Markdown Format (Coming Soon)</h2>
-      <div class="viewer-container">
-        <omniview [data]="markdownContent" [format]="'markdown'"></omniview>
+      <h2>Markdown Format</h2>
+      <div class="viewer-row">
+        <div class="viewer-container">
+          {{ markdownContent }}
+        </div>
+        <div class="viewer-container">
+          <omniview [data]="markdownContent" [format]="'markdown'"></omniview>
+        </div>
       </div>
     </section>
 
     <section class="demo-section">
-      <h2>JSON Format (Coming Soon)</h2>
-      <div class="viewer-container">
-        <omniview [data]="jsonContent" [format]="'json'"></omniview>
+      <h2>JSON Format</h2>
+      <div class="viewer-row">
+        <div class="viewer-container">
+          {{ jsonContent }}
+        </div>
+        <div class="viewer-container">
+          <omniview [data]="jsonContent" [format]="'json'"></omniview>
+        </div>
       </div>
     </section>
-</main>
+  </main>
 
   <footer>
     <p>
