@@ -1,15 +1,26 @@
 import { Component } from '@angular/core';
-import { NgxOmniviewComponent } from 'ngx-omniview';
+import { NgxOmniviewComponent, OmniviewFormat } from 'ngx-omniview';
 import { MarkdownModule } from 'ngx-markdown';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [NgxOmniviewComponent, MarkdownModule],
+  imports: [NgxOmniviewComponent, MarkdownModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'ngx-omniview demo';
+  
+  // For "Try Yourself!" section
+  selectedFormat: OmniviewFormat = 'text';
+  userContent = '';
+  
+  copyToClipboard() {
+    const codeText = `<omniview [data]="content" [format]="'${this.selectedFormat}'"></omniview>`;
+    navigator.clipboard.writeText(codeText).then(() => {
+    });
+  }
   
   // Sample content for testing
   textContent = `

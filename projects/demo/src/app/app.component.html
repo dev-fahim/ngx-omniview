@@ -8,11 +8,17 @@
     <section class="demo-section">
       <h2>Text Format</h2>
       <div class="viewer-row">
-        <pre class="viewer-container">
-          {{ textContent }}
-        </pre>
-        <div class="viewer-container">
-          <omniview [data]="textContent" [format]="'text'"></omniview>
+        <div class="input-container">
+          <label class="input-label">Input string</label>
+          <pre class="viewer-container">
+            {{ textContent }}
+          </pre>
+        </div>
+        <div class="output-container">
+          <label class="output-label">Output view</label>
+          <div class="viewer-container">
+            <omniview [data]="textContent" [format]="'text'"></omniview>
+          </div>
         </div>
       </div>
     </section>
@@ -20,11 +26,17 @@
     <section class="demo-section">
       <h2>HTML Format</h2>
       <div class="viewer-row">
-        <pre class="viewer-container">
-          {{ htmlContent }}
-        </pre>
-        <div class="viewer-container">
-          <omniview [data]="htmlContent" [format]="'html'"></omniview>
+        <div class="input-container">
+          <label class="input-label">Input string</label>
+          <pre class="viewer-container">
+            {{ htmlContent }}
+          </pre>
+        </div>
+        <div class="output-container">
+          <label class="output-label">Output view</label>
+          <div class="viewer-container">
+            <omniview [data]="htmlContent" [format]="'html'"></omniview>
+          </div>
         </div>
       </div>
     </section>
@@ -32,11 +44,17 @@
     <section class="demo-section">
       <h2>Markdown Format</h2>
       <div class="viewer-row">
-        <pre class="viewer-container">
-          {{ markdownContent }}
-        </pre>
-        <div class="viewer-container">
-          <omniview [data]="markdownContent" [format]="'markdown'"></omniview>
+        <div class="input-container">
+          <label class="input-label">Input string</label>
+          <pre class="viewer-container">
+            {{ markdownContent }}
+          </pre>
+        </div>
+        <div class="output-container">
+          <label class="output-label">Output view</label>
+          <div class="viewer-container">
+            <omniview [data]="markdownContent" [format]="'markdown'"></omniview>
+          </div>
         </div>
       </div>
     </section>
@@ -44,11 +62,17 @@
     <section class="demo-section">
       <h2>JSON Format</h2>
       <div class="viewer-row">
-        <pre class="viewer-container">
-          {{ jsonContent }}
-        </pre>
-        <div class="viewer-container">
-          <omniview [data]="jsonContent" [format]="'json'"></omniview>
+        <div class="input-container">
+          <label class="input-label">Input string</label>
+          <pre class="viewer-container">
+            {{ jsonContent }}
+          </pre>
+        </div>
+        <div class="output-container">
+          <label class="output-label">Output view</label>
+          <div class="viewer-container">
+            <omniview [data]="jsonContent" [format]="'json'"></omniview>
+          </div>
         </div>
       </div>
     </section>
@@ -56,11 +80,59 @@
     <section class="demo-section">
       <h2>MathJax Format</h2>
       <div class="viewer-row">
-        <pre class="viewer-container">
-          {{ mathjaxContent }}
-        </pre>
-        <div class="viewer-container">
-          <omniview [data]="mathjaxContent" [format]="'mathjax'"></omniview>
+        <div class="input-container">
+          <label class="input-label">Input string</label>
+          <pre class="viewer-container">
+            {{ mathjaxContent }}
+          </pre>
+        </div>
+        <div class="output-container">
+          <label class="output-label">Output view</label>
+          <div class="viewer-container">
+            <omniview [data]="mathjaxContent" [format]="'mathjax'"></omniview>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Try Yourself!</h2>
+      <div class="try-yourself-container">
+        <div class="try-yourself-controls">
+          <div class="control-group">
+            <label for="format-select">Format:</label>
+            <select id="format-select" [(ngModel)]="selectedFormat" class="format-select">
+              <option value="text">Text</option>
+              <option value="html">HTML</option>
+              <option value="markdown">Markdown</option>
+              <option value="json">JSON</option>
+              <option value="mathjax">MathJax</option>
+            </select>
+          </div>
+        </div>
+        <div class="try-yourself-content">
+          <div class="input-container try-full-width">
+            <label class="input-label">YOUR RAW STRING</label>
+            <textarea 
+              class="try-input" 
+              [(ngModel)]="userContent" 
+              placeholder="Paste, dump, or write your raw string here..."
+            ></textarea>
+          </div>
+          <div class="output-container try-full-width">
+            <label class="output-label">PREVIEW</label>
+            <div class="viewer-container try-preview">
+              <omniview [data]="userContent" [format]="selectedFormat"></omniview>
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet-container">
+          <label class="code-label">CODE:</label>
+          <div class="code-snippet-wrapper">
+            <pre class="code-snippet" #codeSnippet>&lt;omniview [data]="content" [format]="'{{ selectedFormat }}'"&gt;&lt;/omniview&gt;</pre>
+            <button class="copy-button" (click)="copyToClipboard()" type="button">Copy</button>
+          </div>
+          <p class="code-hint">Use "content" as your component property that holds the string data</p>
         </div>
       </div>
     </section>
