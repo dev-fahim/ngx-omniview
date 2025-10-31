@@ -16,6 +16,11 @@
     [data]="renderedContent"
   ></json-viewer>
 
+  <!-- MathJax format -->  
+  <div *ngSwitchCase="'mathjax'" 
+    [mathjax]="renderedContent"
+  ></div>
+
   <!-- All other formats: text, code, latex, mathjax -->
   <pre *ngSwitchDefault
     class="preserve-whitespace"
