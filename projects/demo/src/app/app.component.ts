@@ -1,50 +1,72 @@
 import { Component } from '@angular/core';
-import { NgxOmniviewComponent } from 'ngx-omniview';
+import { NgxOmniviewComponent, OmniviewFormat } from 'ngx-omniview';
 import { MarkdownModule } from 'ngx-markdown';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [NgxOmniviewComponent, MarkdownModule],
+  imports: [NgxOmniviewComponent, MarkdownModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'ngx-omniview demo';
   
-  // Sample content for testing
-  textContent = `
-Hello World!
-This is a simple text content.
-Line breaks are preserved.
-
-This library supports multiple formats!`;
-
-  htmlContent = `
-<h1>HTML Content</h1>
-<p>This is <strong>bold</strong> and <em>italic</em> text.</p>
-<ul>
-  <li>List item 1</li>
-  <li>List item 2</li>
-  <li>List item 3</li>
-</ul>
-<p><a href="https://angular.dev" target="_blank">Link to Angular</a></p>`;
+  // For "Try Yourself!" section
+  selectedFormat: OmniviewFormat = 'text';
+  userContent = '';
+  copyButtonText = 'Copy';
   
-  markdownContent = `
-# Markdown Example
-## Features
-- Item 1
-- Item 2
-- Item 3
+  copyToClipboard() {
+    const codeText = `<omniview [data]="content" [format]="'${this.selectedFormat}'"></omniview>`;
+    navigator.clipboard.writeText(codeText).then(() => {
+      this.copyButtonText = 'Copied!';
+      setTimeout(() => {
+        this.copyButtonText = 'Copy';
+      }, 1500);
+    });
+  }
+  
+  // Sample content for testing
+  textContent = [
+    'Hello World!',
+    'This is a simple text content.',
+    'Line breaks are preserved.',
+    '',
+    'This library supports multiple formats!'
+  ].join('\n');
 
-**Bold text** and *italic text*
-
-Inline math $E = mc^2$, in between a line of text.
-
-and block math:
-$$
-x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}
-$$
-`;
+  htmlContent = [
+    '<h1>HTML Content</h1>',
+    '<p>This is <strong>bold</strong> and <em>italic</em> text.</p>',
+    '<ul>',
+    '  <li>List item 1</li>',
+    '  <li>List item 2</li>',
+    '  <li>List item 3</li>',
+    '</ul>',
+    '<p><a href="https://angular.dev" target="_blank">Link to Angular</a></p>',
+    '',
+    'This library supports HTML format!'
+  ].join('\n');
+  
+  markdownContent = [
+    '# Markdown Example',
+    '## Features',
+    '- Item 1',
+    '- Item 2',
+    '- Item 3',
+    '',
+    '**Bold text** and *italic text*',
+    '',
+    'Inline Math $E = mc^2$, in between a line of text.',
+    '',
+    'and Block Math:',
+    '$$',
+    'x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}',
+    '$$',
+    '',
+    'This library supports Markdown format!'
+  ].join('\n');
 
   jsonContent = JSON.stringify({
     "text": "hello world",
@@ -78,7 +100,8 @@ $$
     ]
   }, null, 2);
 
-  mathjaxContent = `
-$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}$`;
+  mathjaxContent = [
+    '$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}$'
+  ].join('\n');
 
 }
