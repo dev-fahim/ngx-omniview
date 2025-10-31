@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, importProvidersFrom } from '@angular/core';
+import { MarkdownModule } from 'ngx-markdown';
 import { MathjaxModule } from 'mathjax-angular';
 
 import { NgxOmniviewComponent } from './ngx-omniview.component';
@@ -12,9 +13,12 @@ describe('NgxOmniviewComponent', () => {
     await TestBed.configureTestingModule({
       imports: [NgxOmniviewComponent],
       providers: [
-        importProvidersFrom(MathjaxModule.forRoot())
+        importProvidersFrom(
+          MarkdownModule.forRoot(),
+          MathjaxModule.forRoot()
+        )
       ],
-      // allow unknown elements from external modules (markdown, mathjax)
+      // allow unknown elements from external modules (markdown, mathjax, json-viewer)
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
@@ -81,6 +85,37 @@ describe('NgxOmniviewComponent', () => {
     const result = component.renderedContent;
     expect(typeof result).toBe('string');
     expect(result).toContain('Euler');
+  });
+
+  it('should handle inline math syntax in MathJax', () => {
+    component.data = 'The quadratic formula is $x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}$';
+    component.format = 'mathjax';
+    const result = component.renderedContent;
+    expect(result).toBe(component.data);
+    expect(result).toContain('$x =');
+  });
+
+  it('should handle block math syntax in MathJax', () => {
+    component.data = 'Euler\'s Identity:\n$$e^{i\\pi} + 1 = 0$$';
+    component.format = 'mathjax';
+    const result = component.renderedContent;
+    expect(result).toBe(component.data);
+    expect(result).toContain('$$');
+  });
+
+  it('should handle empty string in MathJax', () => {
+    component.data = '';
+    component.format = 'mathjax';
+    const result = component.renderedContent;
+    expect(result).toBe('');
+  });
+
+  it('should handle complex LaTeX expressions in MathJax', () => {
+    component.data = 'Integral: $\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}$';
+    component.format = 'mathjax';
+    const result = component.renderedContent;
+    expect(result).toBe(component.data);
+    expect(result).toContain('\\int');
   });
 
   it('should handle unknown format gracefully', () => {
