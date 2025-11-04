@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NgxOmniviewComponent, OmniviewFormat } from '../../../ngx-omniview/src/public-api';
+import { NgxOmniviewComponent, OmniviewFormat } from 'ngx-omniview';
 import { MarkdownModule } from 'ngx-markdown';
 import { FormsModule } from '@angular/forms';
 
