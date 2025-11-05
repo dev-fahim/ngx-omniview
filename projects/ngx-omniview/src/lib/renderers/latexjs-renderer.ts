@@ -10,30 +10,19 @@ function injectKatexCss() {
   }
 }
 
-export async function registerLatexJsComponent() {
-  if (customElements.get('latex-js')) {
-    injectKatexCss();
-    return;
-  }
+let latexJsInitPromise: Promise<void> | null = null;
 
-  try {
-    // @ts-ignore: dynamic CDN import, no types
-    const module = await import('https://cdn.jsdelivr.net/npm/latex.js/dist/latex.mjs');
-    const LaTeXJSComponent = module.LaTeXJSComponent;
-    customElements.define('latex-js', LaTeXJSComponent);
-
-    const css = 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css';
-    if (!document.querySelector(`link[href="${css}"]`)) {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = css;
-      link.crossOrigin = 'anonymous';
-      document.head.appendChild(link);
+export function registerLatexJsComponent(): Promise<void> {
+  if (latexJsInitPromise) return latexJsInitPromise;
+  latexJsInitPromise = (async () => {
+    if (!customElements.get('latex-js')) {
+      // @ts-ignore: dynamic CDN import, no types
+      const module = await import('https://cdn.jsdelivr.net/npm/latex.js/dist/latex.mjs');
+      customElements.define('latex-js', module.LaTeXJSComponent);
+      console.info('[ngx-omniview] latex-js registered');
     }
-
-    console.info('[ngx-omniview] latex-js web component registered');
-  } catch (err) {
-    console.error('Failed to load latex.js:', err);
-  }
+    injectKatexCss();
+  })();
+  return latexJsInitPromise;
 }
 

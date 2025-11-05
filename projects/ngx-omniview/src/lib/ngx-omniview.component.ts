@@ -69,8 +69,8 @@ export class NgxOmniviewComponent implements OnInit {
   @ViewChild('latexElement') latexEl!: ElementRef;
 
   ngAfterViewInit() {
-    const el = this.latexEl.nativeElement.shadowRoot || this.latexEl.nativeElement;
-    el.querySelector('.page')?.style.setProperty('--size', '1em');
+    const el = this.latexEl?.nativeElement.shadowRoot || this.latexEl?.nativeElement;
+    el?.querySelector('.p')?.style.setProperty('--size', '1em');
   }
 
 }
