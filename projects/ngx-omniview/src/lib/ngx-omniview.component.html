@@ -21,6 +21,22 @@
     [mathjax]="renderedContent"
   ></div>
 
+  <!-- LaTex format -->
+  <div *ngSwitchCase="'latex'">
+    <!-- show error HTML if validation failed -->
+    <div *ngIf="isLatexError"
+      [innerHTML]="renderedContent"
+    ></div>
+
+    <!-- otherwise use latex-js component -->
+    <latex-js
+      *ngIf="!isLatexError"
+      #latexElement
+      baseURL="https://cdn.jsdelivr.net/npm/latex.js/dist/" 
+      [textContent]="renderedContent">
+    </latex-js>
+  </div>
+
   <!-- All other formats: text, code, latex -->
   <pre *ngSwitchDefault class="preserve-whitespace">{{ renderedContent }}</pre>
 
