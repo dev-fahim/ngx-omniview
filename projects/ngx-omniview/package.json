@@ -46,7 +46,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/binapani-edu/ngx-omniview.git"
+    "url": "git+https://github.com/binapani-edu/ngx-omniview.git"
   },
   "bugs": {
     "url": "https://github.com/binapani-edu/ngx-omniview/issues"
@@ -60,9 +60,15 @@
     "ngx-markdown": ">=17.0.0"
   },
   "peerDependenciesMeta": {
-    "katex": { "optional": true },
-    "mathjax-angular": { "optional": true },
-    "ngx-markdown": { "optional": true }
+    "katex": {
+      "optional": true
+    },
+    "mathjax-angular": {
+      "optional": true
+    },
+    "ngx-markdown": {
+      "optional": true
+    }
   },
   "dependencies": {
     "tslib": "^2.8.1"
