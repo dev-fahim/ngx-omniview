@@ -1,5 +1,4 @@
 import { RendererFunction } from './renderer.types';
-import { validateLatex } from './latexjs.renderer';
 
 /**
  * Pre-process LaTeX to convert unsupported environments to supported ones
@@ -67,13 +66,7 @@ function preprocessLatex(latex: string): string {
     
     processed = processed.replace(regex, (match, content) => {
       // clean up the content
-      const cleanContent = content
-        // .replace(/\\label\{[^}]*\}/g, '')
-        // .replace(/\\tag\{[^}]*\}/g, '')
-        // .replace(/&/g, ' ')
-        // .replace(/\\\\/g, '\\\\ ')
-        .trim();
-      
+      const cleanContent = content.trim();
       return `$$${cleanContent}$$`;
     });
   });
@@ -88,6 +81,13 @@ function escapeHtml(text: string): string {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+/**
+ * Validate LaTeX - No validation possible without latexJsModule
+ */
+function validateLatex(_latex: string): string | null {
+  return null;
 }
 
 /**

@@ -11,12 +11,29 @@
 [![Website](https://img.shields.io/badge/Website-binapani.com-0078D4?logo=googlechrome&logoColor=white)](https://www.binapani.com)
 [![YouTube](https://img.shields.io/badge/YouTube-Binapani%20Edu-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/@binapani_edu)
 
-[![NPM](https://nodei.co/npm/ngx-omniview.svg)](https://nodei.co/npm/ngx-omniview/)
+[![NPM](https://nodei.co/npm/ngx-omniview.svg)](https://www.npmjs.com/package/ngx-omniview)
 
 **A universal content viewer for Angular**
 Renders any raw string input as Plain Text, HTML, Markdown, LaTeX, MathJax, JSON, and more... all from a single component.
 
 </div>
+
+---
+
+> [!NOTE]
+> - This README is a **developer guide** for developers **contributing** to or **building** the `ngx-omniview` library.
+> - For **end-user documentation** (installation, usage, API), see **[projects/ngx-omniview/README.md](projects/ngx-omniview/README.md)**.
+
+---
+
+> [!WARNING] 
+> This project is currently in **active development**.
+> While we strive for stability, you may encounter bugs or unexpected behavior.  
+> 
+> **🐛 Found an issue?** Please [report it](https://github.com/binapani-edu/ngx-omniview/issues) so we can improve!  
+> **💡 Have a suggestion?** We'd love to hear your [feedback](https://github.com/binapani-edu/ngx-omniview/issues)!
+
+---
 
 ## Usage
 
