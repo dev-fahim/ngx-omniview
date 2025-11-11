@@ -17,9 +17,7 @@
   ></json-viewer>
 
   <!-- MathJax format -->  
-  <mathjax *ngIf="format === 'mathjax'">
-    {{ renderedContent }}
-  </mathjax>
+  <div [mathjax]="renderedContent" *ngIf="format === 'mathjax'"></div>
 
   <!-- LaTex format -->
   <div *ngIf="format === 'latex'">

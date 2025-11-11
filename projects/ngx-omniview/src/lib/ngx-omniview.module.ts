@@ -9,16 +9,8 @@ import { JsonViewerComponent } from './json-viewer/json-viewer.component';
   declarations: [NgxOmniviewComponent, JsonViewerComponent],
   imports: [
     CommonModule,
-    MarkdownModule.forRoot(),
-    MathjaxModule.forRoot({
-      config: {
-        tex2jax: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']]
-        },
-        messageStyle: 'none'
-      }
-    })
+    MarkdownModule,
+    MathjaxModule
   ],
   exports: [NgxOmniviewComponent, MarkdownModule, MathjaxModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
