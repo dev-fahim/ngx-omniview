@@ -11,12 +11,24 @@
 [![Website](https://img.shields.io/badge/Website-binapani.com-0078D4?logo=googlechrome&logoColor=white)](https://www.binapani.com)
 [![YouTube](https://img.shields.io/badge/YouTube-Binapani%20Edu-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/@binapani_edu)
 
-[![NPM](https://nodei.co/npm/ngx-omniview.svg)](https://nodei.co/npm/ngx-omniview/)
+[![NPM](https://nodei.co/npm/ngx-omniview.svg)](https://www.npmjs.com/package/ngx-omniview)
 
 **A universal content viewer for Angular**
 Renders any raw string input as Plain Text, HTML, Markdown, LaTeX, MathJax, JSON, and more... all from a single component.
 
 </div>
+
+---
+
+> **⚠️ Development Status**
+> 
+> This project is currently in **active development**.
+> While we strive for stability, you may encounter bugs or unexpected behavior.  
+> 
+> **🐛 Found an issue?** Please [report it](https://github.com/binapani-edu/ngx-omniview/issues) so we can improve!  
+> **💡 Have a suggestion?** We'd love to hear your [feedback](https://github.com/binapani-edu/ngx-omniview/issues)!
+
+---
 
 ## Features
 
@@ -49,25 +61,50 @@ Install only the dependencies needed for the formats you use.
 Formats like `text`, `html`, `json`, and `code` work without any optional peer dependencies.
 
 ```bash
-npm install katex@^0.16.25           # For LaTeX (>=0.16.0 <0.17.0)
-npm install mathjax-angular@>=3.0.0  # For MathJax (>=2.0.0 <4.0.0)
-npm install ngx-markdown@>=17.0.0    # For Markdown (>=15.0.0 <21.0.0)
+npm install katex@~0.16.25          # For LaTeX (tested with 0.16.25)
+npm install mathjax-angular@~2.1.1  # For MathJax (tested with 2.1.1)
+npm install ngx-markdown@~15.1.0    # For Markdown (tested with 15.1.0)
 ```
 
 ## Usage
 
 ### Basic Example
 
+**1. Import `NgxOmniviewModule` in your `AppModule`:**
+
 ```typescript
+// app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgxOmniviewModule } from 'ngx-omniview';
+import { MarkdownModule } from 'ngx-markdown';
+import { MathjaxModule } from 'mathjax-angular';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    NgxOmniviewModule,
+    MarkdownModule.forRoot(),  // Required for markdown format
+    MathjaxModule.forRoot()    // Required for mathjax format
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+**2. Use the component in your templates:**
+
+```typescript
+// app.component.ts
 import { Component } from '@angular/core';
-import { NgxOmniviewComponent } from 'ngx-omniview';
 
 @Component({
-  selector: 'app-example',
-  imports: [NgxOmniviewComponent],
+  selector: 'app-root',
   template: `<omniview [data]="content" [format]="'text'"></omniview>`
 })
-export class ExampleComponent {
+export class AppComponent {
   content = 'Hello World!';
 }
 ```
