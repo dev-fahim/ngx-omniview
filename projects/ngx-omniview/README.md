@@ -21,7 +21,8 @@ Renders any raw string input as Plain Text, HTML, Markdown, LaTeX, MathJax, JSON
 ## Features
 
 - ✅ **Multi-format support**: text, html, markdown, latex, mathjax, json, code
-- ✅ **Angular 15-20 compatible**
+- ✅ **Currently compatible with Angular v15**  
+- 🔄 **Planned compatibility for Angular v16–20**
 - ✅ **Simple API**: Just pass data and format
 - ✅ **Unstyled**: Adapts to your design
 - ✅ **Lightweight**: Modular renderer architecture
@@ -38,12 +39,12 @@ To keep the bundle size minimal, `ngx-omniview` relies on several peer dependenc
 Install only the dependencies needed for the formats you use.
 
 **Required:**
-- `@angular/core` and `@angular/common` >=15.0.0 <21.0.0 (Angular 15-20)
+- `@angular/core` and `@angular/common` >=15.0.0 <21.0.0 (Angular 15–20)
 
 **Optional (install only for the formats you use):**
-- `katex` >=0.16.0 <0.17.0 - for `latex` format
-- `mathjax-angular` >=2.0.0 <4.0.0 - for `mathjax` format
-- `ngx-markdown` >=15.0.0 <21.0.0 - for `markdown` format
+- `katex` >=0.16.0 <0.17.0 — for `latex` format
+- `mathjax-angular` >=2.0.0 <4.0.0 — for `mathjax` format
+- `ngx-markdown` >=15.0.0 <21.0.0 — for `markdown` format
 
 Formats like `text`, `html`, `json`, and `code` work without any optional peer dependencies.
 
@@ -73,7 +74,7 @@ export class ExampleComponent {
 
 ### Supported Formats
 
-```typescript
+```html
 <omniview [data]="text" [format]="'text'"></omniview>
 <omniview [data]="html" [format]="'html'"></omniview>
 <omniview [data]="markdown" [format]="'markdown'"></omniview>
@@ -81,6 +82,36 @@ export class ExampleComponent {
 <omniview [data]="mathjax" [format]="'mathjax'"></omniview>
 <omniview [data]="json" [format]="'json'"></omniview>
 <omniview [data]="code" [format]="'code'"></omniview>
+```
+
+## Additional Setup (for LaTeX and Markdown)
+
+### ✅ 1. Add LaTeXJS Script to `index.html`
+
+Add the following script inside your `index.html` (preferably before the closing `</body>` tag):
+
+```html
+<script type="module">
+  import { LaTeXJSComponent } from "https://cdn.jsdelivr.net/npm/latex.js/dist/latex.mjs";
+  customElements.define("latex-js", LaTeXJSComponent);
+</script>
+```
+
+This enables the `<latex-js>` custom element used by `ngx-omniview` for LaTeX rendering.
+
+
+### ✅ 2. Update `angular.json` for Markdown + LaTeX Styling
+
+To support Markdown with LaTeX rendering, add the following entries to the **build > options** section in your `angular.json`:
+
+```json
+"styles": [
+  "node_modules/katex/dist/katex.min.css"
+],
+"scripts": [
+  "node_modules/katex/dist/katex.min.js",
+  "node_modules/katex/dist/contrib/auto-render.min.js"
+]
 ```
 
 ## API
